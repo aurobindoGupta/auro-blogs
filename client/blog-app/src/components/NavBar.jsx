@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useState } from "react";
 
 const NavBar = () => {
@@ -134,7 +135,8 @@ const NavBar = () => {
                   onClick={() => setProfileMenuBtn((prev) => !prev)}
                   sx={{ p: 0 }}
                 >
-                  <Avatar alt="Profile" src="/static/images/avatar/2.jpg" />
+                  {/* <Avatar alt="Profile" src="/static/images/avatar/2.jpg" /> */}
+                  <AccountCircleIcon fontSize="large" sx={{background:'white',borderRadius:'5rem'}}/>
                 </IconButton>
               </Tooltip>
               <Menu
