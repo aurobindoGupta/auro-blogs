@@ -2,7 +2,7 @@ import { Box, Container } from "@mui/material";
 import NavBar from "../../components/NavBar.jsx";
 import RenderCard from "../../components/RenderCard.jsx";
 
-const Home = () => {
+const Profile = () => {
   return (
     <>
       <Container
@@ -15,9 +15,9 @@ const Home = () => {
 
         <Box
           sx={{
-            position: "relative",
             top: 100,
             display: "flex",
+            position: "relative",
             flexWrap: "wrap",
             justifyContent: "space-evenly",
           }}
@@ -28,4 +28,4 @@ const Home = () => {
     </>
   );
 };
-export default Home;
+export default Profile;

@@ -9,20 +9,21 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Avatar,
+  //Avatar,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const [navMenuBtn, setNavMenuBtn] = useState(false);
   const [profileMenuBtn, setProfileMenuBtn] = useState(false);
-
+  const navigate = useNavigate();
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="fixed" sx={{ zIndex: "1" }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             {/* display only when screen size medium */}
@@ -75,7 +76,12 @@ const NavBar = () => {
                 }}
               >
                 <MenuItem onClick={""}>
-                  <Typography textAlign="center">btn1</Typography>
+                  <Typography
+                    textAlign="center"
+                    onClick={() => navigate("/login")}
+                  >
+                    Login
+                  </Typography>
                 </MenuItem>
                 <MenuItem onClick={""}>
                   <Typography textAlign="center">btn2</Typography>
@@ -91,7 +97,7 @@ const NavBar = () => {
               variant="h5"
               noWrap
               component="a"
-              href=""
+              href="/"
               sx={{
                 mr: 2,
                 display: { xs: "flex", md: "none" },
@@ -108,24 +114,17 @@ const NavBar = () => {
             {/* //menu for medium size*/}
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               <Button
-                onClick={""}
+                onClick={() => navigate("/profile")}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                Button1
+                Profile
               </Button>
 
               <Button
-                onClick={""}
+                onClick={() => navigate("/login")}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                Button2
-              </Button>
-
-              <Button
-                onClick={""}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                Button3
+                Login
               </Button>
             </Box>
             {/* profile menu */}
@@ -136,7 +135,10 @@ const NavBar = () => {
                   sx={{ p: 0 }}
                 >
                   {/* <Avatar alt="Profile" src="/static/images/avatar/2.jpg" /> */}
-                  <AccountCircleIcon fontSize="large" sx={{background:'white',borderRadius:'5rem'}}/>
+                  <AccountCircleIcon
+                    fontSize="large"
+                    sx={{ background: "white", borderRadius: "5rem" }}
+                  />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -155,7 +157,7 @@ const NavBar = () => {
                 open={profileMenuBtn}
                 onClose={() => setProfileMenuBtn((prev) => !prev)}
               >
-                <MenuItem onClick={""}>
+                <MenuItem onClick={()=>navigate('/account')}>
                   <Typography textAlign="center">Account</Typography>
                 </MenuItem>
               </Menu>
