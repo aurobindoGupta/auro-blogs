@@ -1,11 +1,31 @@
-import { useRef } from "react";
+import {  useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 export default function TinyEditor() {
+  const location = useLocation();
   const editorRef = useRef(null);
+  let timeout;
+
+  const handleBlogUpdate = (value) => {
+   
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      axios
+        .put("http://192.168.1.4:3001/api/posts", {
+          postId: location.state.id,
+          body: value,
+        })
+        .then((res) => {
+          console.log(res.data);
+        });
+    }, 2000);
+  };
+
   const log = () => {
     if (editorRef.current) {
-      console.log(editorRef.current.getContent());
+      console.log(editorRef.current.getContent({ format: "text" }));
     }
   };
   return (
@@ -13,7 +33,11 @@ export default function TinyEditor() {
       <Editor
         apiKey={import.meta.env.TINY_API_URL}
         onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue="<p>This is the initial content of the editor.</p>"
+        title={location.state.title}
+        initialValue={`<p>${location.state.body}<p>`}
+        onEditorChange={(newValue, editor) => {
+          handleBlogUpdate(editor.getContent({ format: "text" }));
+        }}
         init={{
           height: 700,
           menubar: false,

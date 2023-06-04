@@ -6,31 +6,36 @@ const { posts } = require("../db-setup/posts");
 const postsRouter = express.Router();
 
 postsRouter.get("/", (req, res) => {
-  res.status(200).send(posts);
+  try {
+    res.status(200).send(posts);
+  } catch {
+    res.status(404).json({ message: "somthing is wrong at postrouter" });
+  }
 });
 postsRouter.get("/:userId", (req, res) => {
   const userId = req.params.userId;
   const response = posts.filter((post) => post.userId === parseInt(userId));
-  res.send(response);
+  res.send(response[1].body);
 });
-postsRouter.post("/", (req, res) => {
-  const { userId, title, body } = req.body;
-  if (!userId || !title || !body) {
+postsRouter.put("/", (req, res) => {
+  let demo;
+  const { postId, body } = req.body;
+  if (!postId || !body) {
     res.status(400).send("Missing Required Feilds");
   } else {
-    const newPost = {
-      userId,
-      title,
-      body,
-      id: posts.length + 1,
-    };
-    posts.push(newPost);
+    const response = posts.filter((post) => {
+      if (post.id === parseInt(postId)) {
+        post.body = body;
+        demo=post;
+      }
+      return post
+    });
 
     fs.writeFileSync(
       path.resolve(__dirname, "../db-setup/posts.json"),
-      JSON.stringify(posts)
+      JSON.stringify(response)
     );
-    res.json(newPost);
+    res.json(demo);
   }
 });
 postsRouter.get("/:userId/:postId", (req, res) => {});

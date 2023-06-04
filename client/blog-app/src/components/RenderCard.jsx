@@ -24,7 +24,7 @@ const modalStyle = {
   px: 4,
   pb: 3,
 };
-const RenderCard = () => {
+const RenderCard = ({ data }) => {
   const [openModal, setOpenmodal] = useState(false);
   const navigate = useNavigate();
 
@@ -37,11 +37,18 @@ const RenderCard = () => {
         aria-describedby="parent-modal-description"
       >
         <Box sx={{ ...modalStyle, width: 400 }}>
-          <h2 id="modal-title">Text in a modal</h2>
-          <p id="modal-description">
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </p>
-          <Button variant="outlined" onClick={()=>navigate('/editor')} >Edit</Button>
+          <h2 id="modal-title">{data.title}</h2>
+          <p id="modal-description">{data.body}</p>
+          <Button
+            variant="outlined"
+            onClick={() =>
+              navigate("/editor", {
+                state: { id:data.id ,title: data.title, body: data.body },
+              })
+            }
+          >
+            Edit
+          </Button>
         </Box>
       </Modal>
     );
@@ -51,6 +58,7 @@ const RenderCard = () => {
       <Card
         sx={{
           maxWidth: "30%",
+          width: "20rem",
           minWidth: "10rem ",
           background: "pink",
           height: "15rem",
@@ -58,14 +66,15 @@ const RenderCard = () => {
           m: 1,
         }}
       >
-        <CardContent sx={{ p: 1 }}>
+        <CardContent sx={{ p: 1, height: "100%", width: "100%" }}>
           <Typography gutterBottom variant="h5" component="div">
             User
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
+          <Box>
+            <Typography variant="body2" color="text.secondary">
+              {data.body}
+            </Typography>
+          </Box>
         </CardContent>
         <CardActions>
           <Button

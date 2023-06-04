@@ -6,7 +6,7 @@ const Editor = () => {
   return (
     <Container sx={{ height: "100%" }}>
       <NavBar />
-      <Box sx={{ top: 100, position: "relative" }}>
+      <Box sx={{ top: 100, position: "relative", overflow:'scroll', zIndex:0}}>
         <TinyEditor />
       </Box>
     </Container>

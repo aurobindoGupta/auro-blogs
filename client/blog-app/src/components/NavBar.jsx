@@ -75,7 +75,7 @@ const NavBar = () => {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                <MenuItem onClick={""}>
+                <MenuItem onClick={()=>{}}>
                   <Typography
                     textAlign="center"
                     onClick={() => navigate("/login")}
@@ -83,11 +83,11 @@ const NavBar = () => {
                     Login
                   </Typography>
                 </MenuItem>
-                <MenuItem onClick={""}>
-                  <Typography textAlign="center">btn2</Typography>
+                <MenuItem onClick={()=>{}}>
+                  <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
-                <MenuItem onClick={""}>
-                  <Typography textAlign="center">btn3</Typography>
+                <MenuItem onClick={()=>{}}>
+                  <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
               </Menu>
             </Box>
