@@ -1,10 +1,12 @@
 # auro-blogs
 A blog web app.
+-----------------------------------------------
 Frontend:
  - styling material ui
  - redux toolkit
  - propdrilling
  - deligated components.
+-----------------------------------------------
 Backend:
  - setup express.
  - routing
